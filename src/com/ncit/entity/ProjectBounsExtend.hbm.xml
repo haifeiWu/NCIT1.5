@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+  ~ Hibernate, Relational Persistence for Idiomatic Java
+  ~
+  ~ License: GNU Lesser General Public License (LGPL), version 2.1 or later.
+  ~ See the lgpl.txt file in the root directory or <http://www.gnu.org/licenses/lgpl-2.1.html>.
+  -->
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.ncit.entity">
+
+    <class name="BounsApprove" table="ncit_bounsapprove" lazy="false">
+    
+        <id name="id">
+            <generator class="native"/>
+        </id>
+        
+        <property name="financeId"/>
+        <property name="projectName"/>
+        <property name="fundSendDown"/>
+        <property name="fundSendTotal"/>
+        <property name="fundSendDate"/>
+        <property name="note"/>
+        
+         <!-- department属性，本类与Department的多对一 -->
+		<!-- <many-to-one name="department" class="Department" column="departmentId"></many-to-one> -->
+        
+    </class>
+
+</hibernate-mapping>

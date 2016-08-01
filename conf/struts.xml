@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- 开发者模式 -->
+	<constant name="struts.devMode" value="true"></constant>
+	<!-- 设置扩展名为.action -->
+	<constant name="struts.action.extension" value="action"></constant>
+	<!-- 设置主题为simple -->
+	<constant name="struts.ui.theme" value="simple"></constant>
+	<!-- 修改文件上传大小的限制，20M -->
+	<constant name="struts.multipart.maxSize" value="20971520"/>
+	<!-- 解决页面的乱码问题 -->
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+	
+	<package name="default" namespace="/" extends="struts-default,json-default">
+	
+		<interceptors>
+			<!-- 声明权限拦截器-->
+			<interceptor name="checkRight" class="com.ncit.util.CheckRightInterceptor"></interceptor>
+			<!-- 日志记录拦截器  -->
+			<interceptor name="logRecord" class="com.ncit.util.LogRecordInterceptor"></interceptor>
+			<!-- 重新定义拦截器栈 -->
+			<interceptor-stack name="defaultStack">
+				<interceptor-ref name="checkRight"></interceptor-ref>
+				<interceptor-ref name="logRecord"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<!-- 用户登录 -->
+		<action name="Login" class="com.ncit.action.UserAction" method="login">
+			<result name="login">/index.jsp</result>
+			<result name="loginError">/login.jsp</result>
+		</action>
+		
+		<!-- 加载用户权限树 -->
+		<action name="treeList" class="com.ncit.action.TreeViewAction" method="treeListView">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+		<!-- 导入申请数据与规则管理 -->
+		<action name="import_*" class="com.ncit.action.ImportApproveAction" method="{1}">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+	</package>
+</struts>

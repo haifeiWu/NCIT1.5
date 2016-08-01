@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+  ~ Hibernate, Relational Persistence for Idiomatic Java
+  ~
+  ~ License: GNU Lesser General Public License (LGPL), version 2.1 or later.
+  ~ See the lgpl.txt file in the root directory or <http://www.gnu.org/licenses/lgpl-2.1.html>.
+  -->
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.ncit.entity">
+
+    <class name="User" table="ncit_user" lazy="false">
+    
+        <id name="userId">
+            <generator class="native"/>
+        </id>
+        
+        <property name="userName"/>
+        <property name="userAccount"/>
+        <property name="userPwd"/>
+        <property name="userEmail"/>
+        <property name="userPhoneNumber"/>
+        <property name="userDescription"/>
+        
+        <!-- department属性，本类与Department的多对一 -->
+		<many-to-one name="department" class="Department" column="departmentId"></many-to-one>
+		
+		
+		<!-- roles属性，本类与Role的多对多 -->
+		<set name="roles" table="ncit_user_role" lazy="false">
+			<key column="userId"></key>
+			<many-to-many class="Role" column="roleId"></many-to-many>
+		</set>
+        
+    </class>
+
+</hibernate-mapping>

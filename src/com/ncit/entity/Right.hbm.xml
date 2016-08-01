@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+  ~ Hibernate, Relational Persistence for Idiomatic Java
+  ~
+  ~ License: GNU Lesser General Public License (LGPL), version 2.1 or later.
+  ~ See the lgpl.txt file in the root directory or <http://www.gnu.org/licenses/lgpl-2.1.html>.
+  -->
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.ncit.entity">
+
+    <class name="Right" table="ncit_right" lazy="false">
+    
+        <id name="rightId" column="rightId">
+            <generator class="native"/>
+        </id>
+        
+        <property name="url"/>
+        <property name="rightName"/>
+        
+        <!-- roles属性，本类与Role的多对多-->
+		<set name="roles" table="ncit_role_right">
+			<key column="rightId"></key>
+			<many-to-many class="Role" column="roleId"></many-to-many>
+		</set>
+
+
+		<!-- parent属性，本类与Privilege（上级）的多对一-->
+		<many-to-one name="parent" class="Right" column="parentId"></many-to-one>
+
+
+		<!-- children属性，本类与Privilege（下级）的一对多-->
+		<set name="children" lazy="false" order-by="id ASC">
+			<key column="parentId"></key>
+			<one-to-many class="Right"/>
+		</set>
+        
+    </class>
+
+</hibernate-mapping>

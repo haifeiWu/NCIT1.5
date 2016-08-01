@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+<session-factory>
+
+	<!-- 配置数据库连接信息 -->
+	<property name="connection.driver_class">
+		com.mysql.jdbc.Driver
+	</property>
+	<property name="connection.url">
+		<!-- 乱码解决 -->
+		<![CDATA[jdbc:mysql://localhost:3306/ncit?useUnicode=true&characterEncoding=utf8]]>
+	</property>
+	<!-- 用户名 -->
+	<property name="connection.username">root</property>
+	<!-- 密码 -->
+	<property name="connection.password">123</property>
+	<!-- 数据库方言 -->
+	<property name="dialect">
+		org.hibernate.dialect.MySQL5Dialect
+	</property>
+
+	<!-- 2，其他配置 -->
+	<property name="show_sql">true</property>
+	<property name="hbm2ddl.auto">update</property>
+
+	<!-- <property name="hibernate.current_session_context_class">
+		org.springframework.orm.hibernate4.SpringSessionContext
+		</property>  -->
+	<mapping resource="com/ncit/entity/Department.hbm.xml" />
+	<mapping resource="com/ncit/entity/Right.hbm.xml" />
+	<mapping resource="com/ncit/entity/Role.hbm.xml" />
+	<mapping resource="com/ncit/entity/User.hbm.xml" />
+	<mapping resource="com/ncit/entity/BounsApprove.hbm.xml" />
+	<mapping resource="com/ncit/entity/BounsStats.hbm.xml" />
+	<mapping resource="com/ncit/entity/BounsUse.hbm.xml" />
+
+</session-factory>
+
+</hibernate-configuration>
