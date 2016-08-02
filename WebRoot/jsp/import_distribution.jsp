@@ -39,7 +39,7 @@
 </div>
 <script type="text/javascript">
     var ip = "http://192.168.1.56:8080/";
-    var url = ip + "NCIT1.3/importDis_whichCenter.action";
+    var url = ip + "NCIT1.5/importDis_whichCenter.action";
    // var jsondata = {"userAccount":nttdatajjname,"usersession":nttdatajjses};
     $.ajax({
         type: "POST",

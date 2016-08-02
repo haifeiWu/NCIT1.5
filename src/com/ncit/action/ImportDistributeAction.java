@@ -48,23 +48,20 @@ public class ImportDistributeAction extends BaseAction<BounsSend> {
 		Map<Object, Object> map = new HashMap<Object, Object>();
 		List<BounsSend> list = new ArrayList<BounsSend>();
 		//自定义的session
-		MySessionContext myc= MySessionContext.getInstance();
-		HttpSession session = myc.getSession(this.getUsersession());
 		
-		User user = (User) session.getAttribute("user");
-		//清除之前的session
-		request.getSession().removeAttribute("user");
-		//重新添加session
-		request.getSession().setAttribute("user", user);
-		
+		User user = (User) request.getSession().getAttribute("user");
 		
 		if(user == null){
 			map.clear();
 			map.put("success", "loginError");
 			result = JSON.toJSONString(map);
 		}else{
-			if(user.getUserAccount().equals(this.userAccount)){
 				map.clear();
+				//清除之前的session
+				request.getSession().removeAttribute("user");
+				//重新添加session
+				request.getSession().setAttribute("user", user);
+				
 				//解析excel文件成json数据
 				String str = FileUploadUtils.createSendFieldJson(uploadfile);
 				//将json数据转化成list
@@ -74,16 +71,11 @@ public class ImportDistributeAction extends BaseAction<BounsSend> {
 //				List<BounsApprove> approvreList = bounsApproveService.findAll();
 				//更新奖金管理表
 //				List<BounsStats> statsList = bounsStatsService.insertBounsValue(approvreList);
-				bounsSendService.insertBounsSendValue(list);
+//				bounsSendService.insertBounsSendValue(list);
 				//导入奖金管理表，更新奖金统计表
 //				bounsStatsService.updateBounsValue(list);
 		        map.put("success", request.getSession().getId());
 		        result = JSON.toJSONString(map);
-		        }else{
-		        	map.clear();
-		        	map.put("seccuss", "loginError");
-					result = JSON.toJSONString(map);
-		        }
 		}
 		return SUCCESS;
 	}

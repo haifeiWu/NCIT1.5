@@ -49,5 +49,12 @@
 			</result>
 		</action>
 		
+		<!-- 导入分配数据及规则管理 -->
+		<action name="importDis_*" class="com.ncit.action.ImportDistributeAction" method="{1}">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
 	</package>
 </struts>
