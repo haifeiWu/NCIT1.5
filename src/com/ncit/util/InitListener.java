@@ -13,6 +13,13 @@ import com.ncit.entity.Right;
 import com.ncit.service.RightService;
 
 
+/**
+ * 用户加载用户权限
+ * @author wuhaifei
+ *
+ * @date 2016年8月4日
+ */
+
 public class InitListener implements ServletContextListener {
 
 	public void contextDestroyed(ServletContextEvent sce) {

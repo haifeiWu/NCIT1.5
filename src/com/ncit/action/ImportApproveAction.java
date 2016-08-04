@@ -42,47 +42,12 @@ import com.ncit.util.SimplePropertyFilter;
 public class ImportApproveAction extends BaseAction<BounsApprove> {
 	
 	private String data;
-	private File uploadfile;
-	private String uploadfileContentType;
-	private String uploadfileFileName;
 	
-	//返回总则比例
-	public String approveGeneral(){
-		response.addHeader("Access-Control-Allow-Origin", "*");//公网访问
-		//自定义的session
-		MySessionContext myc= MySessionContext.getInstance();
-		HttpSession session = myc.getSession(this.getUsersession());
-		Map<Object, Object> map = new HashMap<Object, Object>();
-		System.out.println("------------------------->ImportAction----->approveGeneral");
-		
-		User user = (User) session.getAttribute("user");
-		//清除之前的session
-		request.getSession().removeAttribute("user");
-		//重新添加session
-		request.getSession().setAttribute("user", user);
-		if(user == null){
-			map.clear();
-			map.put("success", "loginError");
-			result = JSON.toJSONString(map);
-		}else{
-			if(user.getUserAccount().equals(this.userAccount)){
-				map.clear();
-				map.put("success", request.getSession().getId());
-				map.put("recommendRatio", 0.08);
-		        result = JSON.toJSONString(map);
-		        }else{
-		        	map.clear();
-		        	map.put("seccuss", "loginError");
-					result = JSON.toJSONString(map);
-		        }
-		}
-		return SUCCESS;
-	}
+	
 	
 	//将上传的Excel解析成json数据，并计算细则总则之后返回
 	public String approve() throws IOException{
 //		response.addHeader("Access-Control-Allow-Origin", "*");//公网访问
-		
 		Map<Object, Object> map = new HashMap<Object, Object>();
 		List<BounsApprove> list = new ArrayList<BounsApprove>();//用来接收前台的数据，并将其封装成list
 		
@@ -100,7 +65,7 @@ public class ImportApproveAction extends BaseAction<BounsApprove> {
 			//重新添加session
 			request.getSession().setAttribute("user", user);
 			
-			String str = FileUploadUtils.createFieldJson(uploadfile);
+			String str = FileUploadUtils.createFieldJson(getUploadfile());
 	        System.out.println("json数据："+str);
 			list = JSON.parseArray(str, BounsApprove.class);
 			//处理细则
@@ -205,27 +170,30 @@ public class ImportApproveAction extends BaseAction<BounsApprove> {
 			bounsApproveService.insertNoaApproveData(list);
 			//初始化数据
 			for(int i=0;i<list.size();i++){
-				
 				//初初始化报销数据
+				useList.get(i).setFinanceId(list.get(i).getFinanceId());
+				useList.get(i).setProjectName(list.get(i).getProjectName());
 				useList.get(i).setFundRecommend(list.get(i).getRecommendFund());//项目推荐经费
 				useList.get(i).setFundUseUp(list.get(i).getFundUp());//设置项目经费上限
 				//初始化项目奖金数据
+				extendList.get(i).setFinanceId(list.get(i).getFinanceId());
+				extendList.get(i).setProjectName(list.get(i).getProjectName());
 				extendList.get(i).setFundSendTotal(list.get(i).getPmBouns()*(1-list.get(i).getRecommendRatio()));
 				extendList.get(i).setFundSendDown(list.get(i).getPmBouns()*0.9);//项目奖金发放下限
 				//项目统计数据
+				statsList.get(i).setFinanceId(list.get(i).getFinanceId());
+				statsList.get(i).setProjectName(list.get(i).getProjectName());
 				statsList.get(i).setBounsTotal(list.get(i).getPmBouns());//设置项目奖金总额
 				statsList.get(i).setBounsSendTotal(0);
 				statsList.get(i).setBounsUseTotal(0);//报销额
 				statsList.get(i).setBounsUsedTotal(statsList.get(i).getBounsSendTotal()+statsList.get(i).getBounsUseTotal());
 				statsList.get(i).setBalance(statsList.get(i).getBounsTotal()-statsList.get(i).getBounsUsedTotal());
-				
-				System.out.println("项目推荐经费："+useList.get(i).getFundRecommend());
-				System.out.println("设置项目经费上限"+useList.get(i).getFundUseUp());
-				System.out.println("奖金发放总额："+extendList.get(i).getFundSendTotal());
-				System.out.println("奖金发放下限："+extendList.get(i).getFundSendDown());
 			}
+			
 			bounsUseService.initBounsUseValue(useList);//更新数据库
 			bounsStatsService.initBounsStatsValue(statsList);
+			projectBounsExtendService.initBounsExtendValue(extendList);
+			
 			result = JSON.toJSONString(list);
 			//重新获取sessionId返回
 	        map.put("success", user);
@@ -241,30 +209,6 @@ public class ImportApproveAction extends BaseAction<BounsApprove> {
 		return "";
 	}
 	
-	public File getUploadfile() {
-		return uploadfile;
-	}
-
-	public void setUploadfile(File uploadfile) {
-		this.uploadfile = uploadfile;
-	}
-
-	public String getUploadfileFileName() {
-		return uploadfileFileName;
-	}
-
-	public void setUploadfileFileName(String uploadfileFileName) {
-		this.uploadfileFileName = uploadfileFileName;
-	}
-
-	public String getUploadfileContentType() {
-		return uploadfileContentType;
-	}
-
-	public void setUploadfileContentType(String uploadfileContentType) {
-		this.uploadfileContentType = uploadfileContentType;
-	}
-
 	public String getData() {
 		return data;
 	}

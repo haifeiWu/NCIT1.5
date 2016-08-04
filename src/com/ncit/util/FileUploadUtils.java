@@ -15,6 +15,12 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Workbook;
 
+/**
+ * 处理excel文件
+ * @author wuhaifei
+ *
+ * @date 2016年8月4日
+ */
 public class FileUploadUtils {
 	/**
 	 * 

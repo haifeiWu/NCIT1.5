@@ -1,5 +1,6 @@
 package com.ncit.base;
 
+import java.io.File;
 import java.lang.reflect.ParameterizedType;
 
 import javax.annotation.Resource;
@@ -32,6 +33,10 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>,Servl
 	protected T model;
 	
 	protected String result;
+	
+	protected File uploadfile;
+	protected String uploadfileContentType;
+	protected String uploadfileFileName;
 	
 	protected String userAccount;
 	protected String usersession;
@@ -110,5 +115,29 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>,Servl
 
 	public void setResult(String result) {
 		this.result = result;
+	}
+
+	public String getUploadfileFileName() {
+		return uploadfileFileName;
+	}
+
+	public void setUploadfileFileName(String uploadfileFileName) {
+		this.uploadfileFileName = uploadfileFileName;
+	}
+
+	public String getUploadfileContentType() {
+		return uploadfileContentType;
+	}
+
+	public void setUploadfileContentType(String uploadfileContentType) {
+		this.uploadfileContentType = uploadfileContentType;
+	}
+
+	public File getUploadfile() {
+		return uploadfile;
+	}
+
+	public void setUploadfile(File uploadfile) {
+		this.uploadfile = uploadfile;
 	}
 }

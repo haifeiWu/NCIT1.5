@@ -2,6 +2,12 @@ package com.ncit.entity;
 
 import java.util.Date;
 
+/**
+ * 记录项目的奖金发放信息
+ * @author wuhaifei
+ *
+ * @date 2016年8月4日
+ */
 public class ProjectBounsExtend {
 	
 	private int id;//id序号

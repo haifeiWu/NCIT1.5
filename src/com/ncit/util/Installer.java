@@ -13,6 +13,13 @@ import org.springframework.stereotype.Component;
 import com.ncit.entity.Right;
 import com.ncit.entity.User;
 
+
+/**
+ * 软件初始化的类
+ * @author wuhaifei
+ *
+ * @date 2016年8月4日
+ */
 @Component
 public class Installer {
 	
@@ -52,10 +59,6 @@ public class Installer {
 		session.save(menu5);
 
 		// --------------------
-//		menu = new Right("奖金分配", null, null);
-//		menu1 = new Right("奖金管理", "/processDefinition_list", menu);
-//		session.save(menu);
-//		session.save(menu1);
 		
 		menu = new Right("参数设置", null, null);
 		menu1 = new Right("比例设置", "./jsp/ratio_set.jsp", menu);
@@ -84,6 +87,5 @@ public class Installer {
 		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
 		Installer installer = (Installer) ac.getBean("installer");
 		installer.install();
-//		System.out.println("min"+Integer.MIN_VALUE);
 	}
 }

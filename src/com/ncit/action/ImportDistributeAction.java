@@ -42,7 +42,7 @@ public class ImportDistributeAction extends BaseAction<BounsSend> {
 	
 	
 	//导入分配数据，解析导入的excel文件,并存到数据库
-	public String analyzeAndSaveData(){
+	public String analyzeData(){
 		response.addHeader("Access-Control-Allow-Origin", "*");//公网访问
 		System.out.println("------------------------->ImportAction----->analyzeAndSaveData");
 		Map<Object, Object> map = new HashMap<Object, Object>();
@@ -66,7 +66,7 @@ public class ImportDistributeAction extends BaseAction<BounsSend> {
 				String str = FileUploadUtils.createSendFieldJson(uploadfile);
 				//将json数据转化成list
 				System.out.println("json数据："+str);
-				list = JSON.parseArray(str, BounsSend.class);
+//				list = JSON.parseArray(str, BounsSend.class);
 				//查询到所有的申请数据
 //				List<BounsApprove> approvreList = bounsApproveService.findAll();
 				//更新奖金管理表
@@ -75,6 +75,7 @@ public class ImportDistributeAction extends BaseAction<BounsSend> {
 				//导入奖金管理表，更新奖金统计表
 //				bounsStatsService.updateBounsValue(list);
 		        map.put("success", request.getSession().getId());
+		        map.put("data",str);
 		        result = JSON.toJSONString(map);
 		}
 		return SUCCESS;

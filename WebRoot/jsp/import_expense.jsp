@@ -9,10 +9,11 @@
 </head>
 <body>
 <h4>财务报销数据的导入</h4>
-	<form action="" method="post" enctype="multipart/form-data">
+	<form action="${pageContext.request.contextPath }/importExp_analyzeAndCheack.action" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
-				<td><input type="file" name=""/></td>
+				<td><input type="file" name="uploadfile"/></td>
+				<td><input type="submit" value="上传"/></td>
 			</tr>
 		</table>
 	</form>

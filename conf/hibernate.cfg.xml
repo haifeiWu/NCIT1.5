@@ -38,6 +38,7 @@
 	<mapping resource="com/ncit/entity/BounsApprove.hbm.xml" />
 	<mapping resource="com/ncit/entity/BounsStats.hbm.xml" />
 	<mapping resource="com/ncit/entity/BounsUse.hbm.xml" />
+	<mapping resource="com/ncit/entity/ProjectBounsExtend.hbm.xml" />
 
 </session-factory>
 

@@ -11,7 +11,7 @@
 
 <hibernate-mapping package="com.ncit.entity">
 
-    <class name="BounsApprove" table="ncit_bounsapprove" lazy="false">
+    <class name="ProjectBounsExtend" table="ncit_projectbounsextend" lazy="false">
     
         <id name="id">
             <generator class="native"/>

@@ -106,18 +106,6 @@
                     alert("未登录账户或已过期");
                     window.location.href = "login.html";
                 } else {
-//                    setCookie('nttdatajjses',successData,30);
-////                alert("导入成功");
-//                    console.log(response.data);
-//                    var arr = JSON.parse(response.data);
-//                    var div_center = document.getElementById("div_center");
-//                    for (let i = 0;i<arr.length;i++) {
-//                        console.log(arr[i].centerName);
-//                        var option = document.createElement("option");
-//                        option.innerHTML = arr[i].centerName;
-//                        div_center.appendChild(option);
-//                    }
-//                    document.getElementById("div_proid").disabled = false;
                 }
             }
         });
@@ -131,11 +119,9 @@
             return;
         }
         var formData = new FormData();
-       // formData.append("userAccount",nttdatajjname);
-        //formData.append("usersession",nttdatajjses);
         formData.append("uploadfile",file);
         $.ajax({
-            url: "./importDis_analyzeAndSaveData.action",
+            url: "./importDis_analyzeData.action",
             type: 'POST',
             data: formData,
             async: false,
@@ -150,7 +136,6 @@
                     alert("未登录账户或已过期");
                     window.location.href = "./login.jsp";
                 } else {
-                    //setCookie('nttdatajjses',successData,30);
                     alert("导入成功");
                 }
             }

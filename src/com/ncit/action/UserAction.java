@@ -1,9 +1,16 @@
 package com.ncit.action;
 
 
+import java.util.Arrays;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+
 import com.ncit.base.BaseAction;
 import com.ncit.entity.User;
 
+@Controller
+@Scope("prototype")
 public class UserAction extends BaseAction<User> {
 	public String login(){
 		System.out.println("-------------------------->UserAction");
@@ -16,6 +23,7 @@ public class UserAction extends BaseAction<User> {
 			request.getSession().setAttribute("user", user);
 			return "login";
 		}
+		
 	}
 
 }

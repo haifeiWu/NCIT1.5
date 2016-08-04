@@ -55,6 +55,15 @@
 				<param name="root">result</param>
 			</result>
 		</action>
+		<!-- 财务报销数据的导入 -->
+		<action name="importExp_*" class="com.ncit.action.ImportExpenseAction" method="{1}">
+			<result>/jsp/import_expense.jsp</result>
+		</action>
+		
+		<!-- 项目计提Check -->
+		<action name="importCount_*" class="com.ncit.action.ProjectCountAction" method="{1}">
+			<result>/jsp/welcome.jsp</result><!-- 处理好结果后跳转到的界面 -->
+		</action>
 		
 	</package>
 </struts>

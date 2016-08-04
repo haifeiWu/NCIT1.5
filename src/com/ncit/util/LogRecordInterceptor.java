@@ -35,6 +35,7 @@ public class LogRecordInterceptor extends AbstractInterceptor {
 	public String intercept(ActionInvocation invocation) throws Exception {
 		System.out.println("--------------->日志拦截器");
 		
+		
 		Map session = invocation.getInvocationContext().getSession();  
         Object action = invocation.getAction();  
         String method = invocation.getProxy().getMethod(); 
