@@ -2,6 +2,8 @@ package com.ncit.action;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Controller;
 
 import com.alibaba.fastjson.JSON;
 import com.ncit.base.BaseAction;
+import com.ncit.entity.BounsStats;
 import com.ncit.entity.BounsUse;
 import com.ncit.entity.User;
 import com.ncit.util.FileUploadUtils;
@@ -33,9 +36,7 @@ public class ImportExpenseAction extends BaseAction<BounsUse>{
 		User user = (User) request.getSession().getAttribute("user");
 		
 		if(this.getUploadfile() == null|user == null){
-			map.clear();
-			map.put("success", "user");
-			result = JSON.toJSONString(map);
+			return "error";
 		}else{
 			//清除map
 			map.clear();
@@ -44,17 +45,88 @@ public class ImportExpenseAction extends BaseAction<BounsUse>{
 			//重新添加session
 			request.getSession().setAttribute("user", user);
 			
-			String str = FileUploadUtils.createJson(getUploadfile());
+			String str = FileUploadUtils.createUseFieldJson(getUploadfile());
 	        System.out.println("json数据："+str);
-//			list = JSON.parseArray(str, BounsUse.class);
+	        
+			list = JSON.parseArray(str, BounsUse.class);
+				
 			
-//			result = JSON.toJSONString(list);
-//			//重新获取sessionId返回
-//	        map.put("success", user);
-//	        map.put("data",result);
-//	        System.out.println("返回的result:"+result);
-//	        result = JSON.toJSONString(map);
+			for(int i=0; i<list.size();i++){
+				//判断三次才清除干净,不知道员因何在
+				if(list.get(i).getEvidenceId().equals("null")){
+					list.remove(i);
+				}
+				if(list.get(i).getEvidenceId().equals("null")){
+					list.remove(i);
+				}
+				if(list.get(i).getEvidenceId().equals("null")){
+					list.remove(i);
+				}
+			}
+			List<BounsUse> updateList = bounsUseService.findAll();
+//			List<BounsStats> statsList = bounsStatsService.findAll(); 
+			for(int j=0;j<list.size();j++){
+				System.out.println(list.get(j).toString());
+			}
+			/**
+			 * 未考虑边缘情况
+			 */
+			for(int i=0;i<updateList.size();i++){
+				for(int j=0;j<list.size();j++){
+					if(updateList.get(i).getFinanceId().equals(list.get(j).getFinanceId())){
+						
+						if(list.get(j).getExpenseMoney()>updateList.get(i).getFundUseUp()){
+							updateList.get(i).setAlert("项目经费支出超标");
+						}else{
+							updateList.get(i).setAlert(null);
+							updateList.get(i).setExpenseReason(list.get(j).getExpenseReason());
+							updateList.get(i).setExpenseMoney(list.get(j).getExpenseMoney());
+							updateList.get(i).setExpenseDate(list.get(j).getExpenseDate());
+						}
+					}
+				}
+			}
+			
+//			bounsUseService.updateBounsUseInfor(updateList);
+//			bounsStatsService.updateBunstatsInfor(statsList);
+			
+			request.getSession().setAttribute("updateList", updateList);//暂时的这么写
+			
+			for(int i=0;i<updateList.size(); i++){
+				System.out.println(updateList.toString());
+			}
+			return "analyzeAndCheack";
 		}
-		return SUCCESS;
+	}
+	
+	/**
+	 * 用于保存数据
+	 * @return
+	 */
+	public String saveData(){
+		List<BounsStats> statsList = bounsStatsService.findAll();
+		List<BounsUse> updateList = (List<BounsUse>) request.getSession().getAttribute("updateList");
+		User user = (User) request.getSession().getAttribute("user");
+		//清除session
+		request.getSession().removeAttribute("updateList");
+		
+		if(user == null|updateList==null){
+			return "error";
+		}else{
+			//保存,更新数据
+			bounsUseService.updateBounsUseInfor(updateList);
+			bounsStatsService.updateBunstatsInfor(statsList);
+			return "saveData";
+		}
+		
+	}
+	/**
+	 * 取消
+	 * @return
+	 */
+	public String cancel(){
+		//清除session
+		request.getSession().removeAttribute("updateList");
+		return "cancel";
 	}
 }

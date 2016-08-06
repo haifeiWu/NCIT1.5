@@ -43,8 +43,6 @@ public class ImportApproveAction extends BaseAction<BounsApprove> {
 	
 	private String data;
 	
-	
-	
 	//将上传的Excel解析成json数据，并计算细则总则之后返回
 	public String approve() throws IOException{
 //		response.addHeader("Access-Control-Allow-Origin", "*");//公网访问

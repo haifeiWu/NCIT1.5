@@ -13,7 +13,7 @@
 	</property>
 	<property name="connection.url">
 		<!-- 乱码解决 -->
-		<![CDATA[jdbc:mysql://localhost:3306/ncit?useUnicode=true&characterEncoding=utf8]]>
+		<![CDATA[jdbc:mysql://123.206.8.147:3306/ncit?useUnicode=true&characterEncoding=utf8]]>
 	</property>
 	<!-- 用户名 -->
 	<property name="connection.username">root</property>

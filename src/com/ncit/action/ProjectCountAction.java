@@ -1,10 +1,19 @@
 package com.ncit.action;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.alibaba.fastjson.JSON;
+import com.ncit.entity.BounsUse;
+import com.ncit.entity.User;
+import com.ncit.util.FileUploadUtils;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -19,20 +28,27 @@ import com.opensymphony.xwork2.ActionSupport;
 
 @Controller
 @Scope("prototype")
-public class ProjectCountAction extends ActionSupport{
+public class ProjectCountAction extends ActionSupport implements ServletRequestAware{
 	
 	private File uploadfile;
 	private String uploadfileContentType;
 	private String uploadfileFileName;
+	private HttpServletRequest request;
 	
 	//解析上传的excel文件并核对项目计提信息，看是否正确，
 	//最后将数据返回前台，注意项目计提不足的警告应该用颜色标示
 	public String analyzeCountCheack(){
 		
-		return SUCCESS;
+		User user = (User) request.getSession().getAttribute("user");
+		
+		if(user == null){
+			return "error";
+		}else{
+			String str = FileUploadUtils.createProjectCountFieldJson(getUploadfile());
+	        System.out.println("json数据："+str);
+	        return "analyzeCountCheack";
+		}
 	}
-	
-	
 	
 	public File getUploadfile() {
 		return uploadfile;
@@ -51,6 +67,11 @@ public class ProjectCountAction extends ActionSupport{
 	}
 	public void setUploadfileFileName(String uploadfileFileName) {
 		this.uploadfileFileName = uploadfileFileName;
+	}
+
+	@Override
+	public void setServletRequest(HttpServletRequest request) {
+		this.request = request;
 	}
 	
 }

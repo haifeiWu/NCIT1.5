@@ -24,4 +24,9 @@ public class BounsStatsServiceImple extends DaoSupportImple<BounsStats> implemen
 		}
 	}
 
+	@Override
+	public void updateBunstatsInfor(List<BounsStats> statsList) {
+		
+	}
+
 }

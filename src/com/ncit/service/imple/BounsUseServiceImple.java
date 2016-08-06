@@ -26,4 +26,9 @@ public class BounsUseServiceImple extends DaoSupportImple<BounsUse> implements B
 		}
 	}
 
+	@Override
+	public void updateBounsUseInfor(List<BounsUse> updateList) {
+		
+	}
+
 }

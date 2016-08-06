@@ -18,6 +18,7 @@
         </id>
         
         <property name="financeId"/>
+        <property name="evidenceId"/>
         <!-- <property name="department"/> -->
         <property name="projectName"/>
         

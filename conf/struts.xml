@@ -29,8 +29,18 @@
 				<interceptor-ref name="defaultStack"></interceptor-ref>
 			</interceptor-stack>
 		</interceptors>
+		
+		<!-- 全局结果图 -->
+		<global-results>
+			<result name="error">/jsp/errorPage.jsp</result>
+		</global-results>
+		
 		<!-- 用户登录 -->
 		<action name="Login" class="com.ncit.action.UserAction" method="login">
+			<result name="login">/index.jsp</result>
+			<result name="loginError">/login.jsp</result>
+		</action>
+		<action name="classinfo" class="com.ncit.action.ClassInfoAction" method="login">
 			<result name="login">/index.jsp</result>
 			<result name="loginError">/login.jsp</result>
 		</action>
@@ -57,12 +67,14 @@
 		</action>
 		<!-- 财务报销数据的导入 -->
 		<action name="importExp_*" class="com.ncit.action.ImportExpenseAction" method="{1}">
-			<result>/jsp/import_expense.jsp</result>
+			<result name="analyzeAndCheack">/jsp/import_expense.jsp</result>
+			<result name="saveData">/jsp/import_expense.jsp</result>
+			<result name="canel">/jsp/import_expense.jsp</result>
 		</action>
 		
 		<!-- 项目计提Check -->
 		<action name="importCount_*" class="com.ncit.action.ProjectCountAction" method="{1}">
-			<result>/jsp/welcome.jsp</result><!-- 处理好结果后跳转到的界面 -->
+			<result name="analyzeCountCheack">/jsp/import_accruedCheck.jsp</result><!-- 处理好结果后跳转到的界面 -->
 		</action>
 		
 	</package>
