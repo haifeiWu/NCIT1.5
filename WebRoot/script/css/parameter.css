@@ -1,0 +1,14 @@
+@charset "utf-8";
+*{border:0;margin:0;padding:0;}
+table{border-spacing: 0;}
+.cs_rightinfo{margin:2%;}
+.title{ display:block; text-align:center;color:#056dae; font-size: 16px;margin: 2%;}
+#selid{ margin-left:6%;font-size: 14px;}
+.cs_tablelist{border:solid 1px #cbcbcb; width:80%; margin:0 auto;}
+.cs_tablelist th{background:#F0F5F7; height:34px; line-height:34px; border-bottom:solid 1px #b6cad2; text-indent:11px; text-align:center;font-size: 14px;}
+.cs_tablelist td{line-height:35px; text-align:center; border-bottom: dashed 1px #c7c7c7;border-right: dotted 1px #c7c7c7;}
+input{text-align: center;}
+.cs_button{margin-right: 8%;}
+.submit{background-color: #60BBF8; width:122px;height: 37px;float: right;text-align: center;font-size: 14px;margin:2%;
+	line-height: 37px;box-shadow: #e0e0e0 0px 0px 10px;border-radius: 5px;}
+.submit:hover{background-color:#1fbba6; }

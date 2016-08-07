@@ -27,7 +27,6 @@ import com.ncit.util.FileUploadUtils;
 @Scope("prototype")
 public class ImportExpenseAction extends BaseAction<BounsUse>{
 	
-	
 	//解析excel文件并核对经费是否超标
 	public String analyzeAndCheack(){
 		Map<Object, Object> map = new HashMap<Object, Object>();
@@ -50,7 +49,6 @@ public class ImportExpenseAction extends BaseAction<BounsUse>{
 	        
 			list = JSON.parseArray(str, BounsUse.class);
 				
-			
 			for(int i=0; i<list.size();i++){
 				//判断三次才清除干净,不知道员因何在
 				if(list.get(i).getEvidenceId().equals("null")){
@@ -86,12 +84,7 @@ public class ImportExpenseAction extends BaseAction<BounsUse>{
 					}
 				}
 			}
-			
-//			bounsUseService.updateBounsUseInfor(updateList);
-//			bounsStatsService.updateBunstatsInfor(statsList);
-			
 			request.getSession().setAttribute("updateList", updateList);//暂时的这么写
-			
 			for(int i=0;i<updateList.size(); i++){
 				System.out.println(updateList.toString());
 			}
@@ -114,8 +107,6 @@ public class ImportExpenseAction extends BaseAction<BounsUse>{
 			return "error";
 		}else{
 			//保存,更新数据
-			bounsUseService.updateBounsUseInfor(updateList);
-			bounsStatsService.updateBunstatsInfor(statsList);
 			return "saveData";
 		}
 	}

@@ -40,10 +40,6 @@
 			<result name="login">/index.jsp</result>
 			<result name="loginError">/login.jsp</result>
 		</action>
-		<action name="classinfo" class="com.ncit.action.ClassInfoAction" method="login">
-			<result name="login">/index.jsp</result>
-			<result name="loginError">/login.jsp</result>
-		</action>
 		
 		<!-- 加载用户权限树 -->
 		<action name="treeList" class="com.ncit.action.TreeViewAction" method="treeListView">
@@ -57,6 +53,7 @@
 			<result type="json">
 				<param name="root">result</param>
 			</result>
+			<result name="cancel">/jsp/import_approve.jsp</result>
 		</action>
 		
 		<!-- 导入分配数据及规则管理 -->
@@ -69,7 +66,7 @@
 		<action name="importExp_*" class="com.ncit.action.ImportExpenseAction" method="{1}">
 			<result name="analyzeAndCheack">/jsp/import_expense.jsp</result>
 			<result name="saveData">/jsp/welcome.jsp</result>
-			<result name="canel">/jsp/welcome.jsp</result>
+			<result name="canel">/jsp/import_expense.jsp</result>
 		</action>
 		
 		<!-- 项目计提Check -->

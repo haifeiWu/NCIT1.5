@@ -9,9 +9,14 @@
     <script type="text/javascript" src="../script/js/hchstudio.js"></script>
     <link type="text/css" href="../script/css/admin.css" rel="stylesheet"/>
     <style type="text/css">
-        #info_content{font-size: 18px;}
-        #info_content label{width: 33%;display: inline-block;text-align: center;line-height: 36px;}
-        .info_head{border-bottom: 1px solid #000;margin-top: 2%;padding-left: 1%;font-size: 20px;margin-bottom: 1%;}
+        #approve_h2{text-align: center;color: #056dae;}
+        .import_method{margin: 2%;}
+        #info_content{font-size: 18px;margin: 2%;}
+        #info_content label{width: 33%;display: inline-block;text-align: right;line-height: 36px;}
+        .content{border:solid 1px #cbcbcb;border-bottom: none; }
+        .content_next{border:solid 1px #cbcbcb;border-top: none; margin-bottom: 2%;padding-bottom: 2%;}
+        .info_head{padding-left: 1%;font-size: 20px;margin-bottom: 2%;
+            background:#F0F5F7; color:#056dae; text-align: left; }
         .info_input{width: 30%;height: 25px;}
         .div_far{height: 350px;margin-top: 2%;border: 1px solid #0f0f0f;}
         #sec_content{width: 100%;text-align: center;}
@@ -19,17 +24,18 @@
         .sec_sub_head{width: 6.9%;float: left;height: 69px;border-bottom: 1px dashed #0f0f0f;}
         .sec_sub_div{float: left;width: 93%;height: 35px;overflow: hidden;}
         .border_null{border-bottom-width: 0px;}
-        .div_but{text-align: right;margin-top: 2%;}
-        .div_but input{margin-right: 5%;font-size: 18px;padding: 3px 6px;}
+        .approve_button{margin-top: 2%;}
+        .div_but{background-color: #60BBF8; width:122px;height: 37px;float: right;text-align: center;font-size: 14px;margin:2%;line-height: 37px;box-shadow: #e0e0e0 0px 0px 10px;border-radius: 5px;}
+        .div_but:hover{background-color:#1fbba6; }
+        .submit{background-color: #60BBF8; width:122px;height: 37px;float: right;text-align: center;font-size: 14px;margin:2%;
+	line-height: 37px;box-shadow: #C6C9C9 0px 0px 10px;border-radius: 5px;}
+        .cancel{background-color: #60BBF8; width:122px;height: 37px;float: right;text-align: center;font-size: 14px;margin:2%;
+	line-height: 37px;box-shadow: #e0e0e0 0px 0px 10px;border-radius: 5px;}
+		.submit:hover,.cancel:hover{background-color:#1fbba6; }
+        
     </style>
     <script type="text/javascript">
-        /* var nttdatajjname = getCookie("nttdatajjname");
-        var nttdatajjses = getCookie("nttdatajjses");
-        console.log("import_approve---" + nttdatajjname + "---" + nttdatajjses);
-        if (nttdatajjses == null || nttdatajjname == null || nttdatajjses == "" || nttdatajjname == ""){
-            alert("未登录账户或已过期");
-            window.location.href = "login.html";
-        } */
+        
     </script>
 </head>
 <body class="inline_body">
@@ -37,57 +43,59 @@
     <h2 id="approve_h2">申请数据导入</h2>
 </div>
 <div id="div_fir" style="position: absolute;z-index: 1;width: 98%;">
-    <div>
+    <div class="import_method">
         <label>请选择数据导入方式:</label>
         <label><input type="radio" name="type" checked="checked" value="fileUp" onclick="showiU()"/>文件上传</label>
         <label><input type="radio" name="type" value="single" onclick="showiC()"/>手动录入</label>
     </div>
-    <div style="margin-top: 2%;">
+    <div style="margin-left: 2%;">
         <input id="uploadfile" style="width: 20%;font-size: 15px;" type="file" name="uploadfile"/>
     </div>
     <div id="info_content">
-        <div>
+        <div class="content">
             <div class="info_head">项目基本信息</div>
             <label>项目名称：<input id="projectName" class="info_input" type="text" name="projectName" value="wewe"/></label>
             <label>申请者ID：<input id="applyId" class="info_input" type="text" name="applierId" value="001"/></label>
-            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;财务ID：<input id="financeId" class="info_input" type="text" name="financeId" value="5W211011605"/></label>
+            <label>财务ID：<input id="financeId" class="info_input" type="text" name="financeId" value="5W211011605"/></label>
         </div>
-        <div>
-            <label>&nbsp;&nbsp;&nbsp;&nbsp;部门ID：<input id="departmentId" class="info_input" type="text" name="departmentId" value="003"/></label>
+        <div class="content_next">
+            <label >部门ID：<input id="departmentId" class="info_input" type="text" name="departmentId" value="003"/></label>
             <label>部门名称：<input id="department" class="info_input" type="text" name="department" value="jdhd"/></label>
             <label>PM员工ID：<input id="pmId" class="info_input" type="text" name="pmId" value="0016"/></label>
         </div>
-        <div>
+        <div class="content">
             <div class="info_head">项目开发信息</div>
             <label>社员人月数：<input id="memberPersonMonth" class="info_input" type="text" name="memberPersonMonth" value="10"/></label>
             <label>BP人月数：<input id="bPPersonMonth" class="info_input" type="text" name="BPPersonMonth" value="2"/></label>
             <label>离职人月数：<input id="quitPersonMonth" class="info_input" type="text" name="quitPersonMonth" value="1"/></label>
         </div>
-        <div>
+        <div class="content_next">
             <label>连携人月数：<input id="workPersonMonth" class="info_input" type="text" name="workPersonMonth" value="0"/></label>
             <label style="display: none;">BP人月数<input type="text" name="pmId"/></label>
             <label style="display: none;">离职人月数<input type="text" name="financeId"/></label>
         </div>
-        <div>
+        <div class="content">
             <div class="info_head">项目申请日期</div>
             <label>申请日期：<input id="applyDate" class="info_input" type="text" name="applyDate" value="1433174400000"/></label>
             <label>审批日期：<input id="approveDate" class="info_input" type="text" name="approveDate" value="1434384000000"/></label>
             <label>申请对象期间：<input id="applyDuration" class="info_input" type="text" name="applyDuration" value="ewrtwet w"/></label>
         </div>
-        <div>
-            <label style="width: 100%;">
-                备注：<input id="note" style="width: 81%;" class="info_input" type="text" name="note" value="mukyj"/>
+        <div class="content_next">
+            <label style="margin-left: 210px;">
+                备注：<input id="note" style="width: 80%;" class="info_input" type="text" name="note" value="mukyj"/>
             </label>
         </div>
     </div>
-    <div class="div_but">
-        <input type="button" value="下一步" onclick="postData()"/>
+    <div class="approve_button">
+        <button class="div_but" onclick="postData()"/>下一步</button>
     </div>
 </div>
 <div id="div_sec" style="position: absolute;z-index: 2;width: 98%;display: none;">
     <div id="sec_content"></div>
     <div class="div_but">
-        <input type="button" value="确认导入" onclick="aff_import()"/>
+        <!-- <input type="button" value="确认导入" onclick="aff_import()"/> -->
+        <a href="${pageContext.request.contextPath }/import_cancel.action"><button class="cancel">取消导入</button></a>
+        <button class="cancel" onclick="aff_import()">确认导入</button>
     </div>
 </div>
 <script type="text/javascript">

@@ -52,12 +52,17 @@
     </table>
     
      <div class="expense_button">
-        <a href="${pageContext.request.contextPath }/importExp_saveData.action"><button class="cancel">取消</button></a>
-        <a href="${pageContext.request.contextPath }/importExp_camcel.action"><button class="submit">确定</button></a>
+        <a href="${pageContext.request.contextPath }/importExp_cancel.action"><button class="cancel">取消</button></a>
+        <a href="${pageContext.request.contextPath }/importExp_saveData.action"><button class="submit" onclick="show_confirm()">确定</button></a>
      </div>
     </div>
     <script>
         $('.tablelist tbody tr:odd').addClass('odd');
+        function show_confirm()
+        {
+        alert("数据保存成功！");
+        /* location='http://www.baidu.com'; */
+        }
     </script>
 </body>
 </html>
