@@ -45,6 +45,7 @@ public class ProjectCountAction extends ActionSupport implements ServletRequestA
 			return "error";
 		}else{
 			String str = FileUploadUtils.createProjectCountFieldJson(getUploadfile());
+			
 	        System.out.println("json数据："+str);
 	        return "analyzeCountCheack";
 		}
