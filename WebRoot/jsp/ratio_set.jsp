@@ -20,7 +20,7 @@
 </head>
 <body>
 	<div class="cs_rightinfo">
-		<form action="" >
+		<form action="${pageContext.request.contextPath }/import_ratioSet.action" method="post">
 
 		<span class="title">参数设置</span>
 

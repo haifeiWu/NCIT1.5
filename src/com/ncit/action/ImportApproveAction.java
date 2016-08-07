@@ -206,6 +206,13 @@ public class ImportApproveAction extends BaseAction<BounsApprove> {
 		System.out.println("取消数据导入");
 		return "cancel";
 	}
+	
+	//设置比例
+	public String ratioSet(){
+		System.out.println("设置比例");
+		return "ratioset";
+	}
+	
 	//批量导入项目分配信息
 	public String distribution(){
 		
