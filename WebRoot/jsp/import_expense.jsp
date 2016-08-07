@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title></title>
@@ -51,6 +50,11 @@
 			</c:forEach>   
         </tbody>
     </table>
+    
+     <div class="expense_button">
+        <a href="${pageContext.request.contextPath }/importExp_saveData.action"><button class="cancel">取消</button></a>
+        <a href="${pageContext.request.contextPath }/importExp_camcel.action"><button class="submit">确定</button></a>
+     </div>
     </div>
     <script>
         $('.tablelist tbody tr:odd').addClass('odd');

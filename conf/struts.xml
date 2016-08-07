@@ -68,8 +68,8 @@
 		<!-- 财务报销数据的导入 -->
 		<action name="importExp_*" class="com.ncit.action.ImportExpenseAction" method="{1}">
 			<result name="analyzeAndCheack">/jsp/import_expense.jsp</result>
-			<result name="saveData">/jsp/import_expense.jsp</result>
-			<result name="canel">/jsp/import_expense.jsp</result>
+			<result name="saveData">/jsp/welcome.jsp</result>
+			<result name="canel">/jsp/welcome.jsp</result>
 		</action>
 		
 		<!-- 项目计提Check -->
