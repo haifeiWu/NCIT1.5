@@ -56,6 +56,7 @@
 			<result name="ratioset">/jsp/welcome.jsp</result>
 			<result name="cancel">/jsp/import_approve.jsp</result>
 			<result name="loginOut">/login.jsp</result>
+			<result name="updatePwd">/jsp/userManage/updatePWD.jsp</result>
 		</action>
 		
 		<!-- 导入分配数据及规则管理 -->

@@ -52,10 +52,10 @@
         <div style="float: left;color: white;font-size: 30px;margin-top: 1%;">软件项目工程师奖金管理系统</div>
         <div style="float: right;margin-right: 2%;width: 20%;height: 100%;">
             <div style="width: 100%;height: 50%;">
-                <div style="float: right;color: white;margin-top: 5%;"><a href="${pageContext.request.contextPath }/">注销登录</a></div>
+                <div style="float: right;color: white;margin-top: 5%;"><a href="${pageContext.request.contextPath }/import_loginOut.action">注销登录</a></div>
                 <div style="float: right;margin-right: 5%;margin-top: 5%;">当前用户:${user.userName }</div>
             </div>
-            <div style="color: white;text-align: right;"><a href="#">修改密码</a></div>
+            <div style="color: white;text-align: right;"><a href="${pageContext.request.contextPath }/import_updatePwd.action">修改密码</a></div>
         </div>
     </div>
 </div>

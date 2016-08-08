@@ -220,6 +220,10 @@ public class ImportApproveAction extends BaseAction<BounsApprove> {
 		request.getSession().removeAttribute("user");
 		return "loginOut";
 	}
+	//修改密码，有问题待完善
+	public String updatePwd(){
+		return "updatePwd";
+	}
 	
 	public String getData() {
 		return data;
