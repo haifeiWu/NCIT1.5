@@ -34,15 +34,12 @@
         </tr>
         </thead>
         <tbody>
-			<c:forEach items="${sessionScope.updateList}" var="item" varStatus="status">  
+			<c:forEach items="${countList}" var="item" varStatus="status">  
 		  		<tr >  
 			    	<td>${item.financeId}</td>
 			    	<td>${item.projectName}</td>
-			    	<td>${item.fundUseUp}</td>
-			    	<td>${item.fundRecommend}</td>
-			    	<td>${item.expenseMoney}</td>
-			    	<td>${item.expenseDate}</td>
-			    	<td>${item.expenseReason}</td>
+			    	<td>${item.amountPaid}</td>
+			    	<td>${item.countMoney}</td>
 			    	<td>${item.alert}</td>
 		 		</tr>
 			</c:forEach>   

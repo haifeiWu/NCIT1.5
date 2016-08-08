@@ -4,11 +4,13 @@ import java.io.File;
 import java.lang.reflect.ParameterizedType;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
+import org.apache.struts2.util.ServletContextAware;
 
 import com.ncit.service.BounsApproveService;
 import com.ncit.service.BounsSendService;
@@ -28,7 +30,8 @@ import com.opensymphony.xwork2.ModelDriven;
  * @BaseAction
  * @param <T>
  */
-public class BaseAction<T> extends ActionSupport implements ModelDriven<T>,ServletRequestAware,ServletResponseAware {
+public class BaseAction<T> extends ActionSupport implements ModelDriven<T>,
+									ServletRequestAware,ServletResponseAware,ServletContextAware {
 
 	protected T model;
 	
@@ -43,6 +46,7 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>,Servl
 	
 	protected HttpServletRequest request;
 	protected HttpServletResponse response;
+	protected ServletContext context;
 	
 	public BaseAction() {
 		try {
@@ -139,5 +143,10 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>,Servl
 
 	public void setUploadfile(File uploadfile) {
 		this.uploadfile = uploadfile;
+	}
+
+	@Override
+	public void setServletContext(ServletContext context) {
+		this.context = context;
 	}
 }

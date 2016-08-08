@@ -277,4 +277,9 @@ public class BounsApprove implements Serializable{
 	public void setQuitPersonMonth(double quitPersonMonth) {
 		this.quitPersonMonth = quitPersonMonth;
 	}
+	
+	@Override
+	public String toString() {
+		return this.financeId+" "+this.projectName+" "+this.centerFund;
+	}
 }

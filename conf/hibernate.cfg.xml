@@ -27,6 +27,10 @@
 	<!-- 2，其他配置 -->
 	<property name="show_sql">true</property>
 	<property name="hbm2ddl.auto">update</property>
+	
+	<property name="hibernate.format_sql">true</property>
+	<property name="hibernate.use_sql_comments"></property>
+	
 
 	<!-- <property name="hibernate.current_session_context_class">
 		org.springframework.orm.hibernate4.SpringSessionContext
