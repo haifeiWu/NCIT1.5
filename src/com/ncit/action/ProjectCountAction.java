@@ -11,7 +11,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.alibaba.fastjson.JSON;
+import com.ncit.base.BaseAction;
 import com.ncit.entity.BounsUse;
+import com.ncit.entity.ProjectCount;
 import com.ncit.entity.User;
 import com.ncit.util.FileUploadUtils;
 import com.opensymphony.xwork2.ActionSupport;
@@ -28,16 +30,14 @@ import com.opensymphony.xwork2.ActionSupport;
 
 @Controller
 @Scope("prototype")
-public class ProjectCountAction extends ActionSupport implements ServletRequestAware{
+public class ProjectCountAction extends BaseAction implements ServletRequestAware{
 	
-	private File uploadfile;
-	private String uploadfileContentType;
-	private String uploadfileFileName;
-	private HttpServletRequest request;
 	
 	//解析上传的excel文件并核对项目计提信息，看是否正确，
 	//最后将数据返回前台，注意项目计提不足的警告应该用颜色标示
 	public String analyzeCountCheack(){
+		List<ProjectCount> countList = new ArrayList<ProjectCount>();
+		
 		
 		User user = (User) request.getSession().getAttribute("user");
 		
@@ -45,34 +45,10 @@ public class ProjectCountAction extends ActionSupport implements ServletRequestA
 			return "error";
 		}else{
 			String str = FileUploadUtils.createProjectCountFieldJson(getUploadfile());
+			countList = JSON.parseArray(str, ProjectCount.class);
 			
 	        System.out.println("json数据："+str);
 	        return "analyzeCountCheack";
 		}
 	}
-	
-	public File getUploadfile() {
-		return uploadfile;
-	}
-	public void setUploadfile(File uploadfile) {
-		this.uploadfile = uploadfile;
-	}
-	public String getUploadfileContentType() {
-		return uploadfileContentType;
-	}
-	public void setUploadfileContentType(String uploadfileContentType) {
-		this.uploadfileContentType = uploadfileContentType;
-	}
-	public String getUploadfileFileName() {
-		return uploadfileFileName;
-	}
-	public void setUploadfileFileName(String uploadfileFileName) {
-		this.uploadfileFileName = uploadfileFileName;
-	}
-
-	@Override
-	public void setServletRequest(HttpServletRequest request) {
-		this.request = request;
-	}
-	
 }
