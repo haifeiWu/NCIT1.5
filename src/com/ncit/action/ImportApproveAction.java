@@ -215,9 +215,10 @@ public class ImportApproveAction extends BaseAction<BounsApprove> {
 	}
 	
 	//批量导入项目分配信息
-	public String distribution(){
-		
-		return "";
+	public String loginOut(){
+//		User user = (User) request.getSession().getAttribute("user");
+		request.getSession().removeAttribute("user");
+		return "loginOut";
 	}
 	
 	public String getData() {
