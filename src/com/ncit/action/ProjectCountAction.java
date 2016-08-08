@@ -38,7 +38,6 @@ public class ProjectCountAction extends BaseAction implements ServletRequestAwar
 	public String analyzeCountCheack(){
 		List<ProjectCount> countList = new ArrayList<ProjectCount>();
 		
-		
 		User user = (User) request.getSession().getAttribute("user");
 		
 		if(user == null){
@@ -46,7 +45,6 @@ public class ProjectCountAction extends BaseAction implements ServletRequestAwar
 		}else{
 			String str = FileUploadUtils.createProjectCountFieldJson(getUploadfile());
 			countList = JSON.parseArray(str, ProjectCount.class);
-			
 	        System.out.println("json数据："+str);
 	        return "analyzeCountCheack";
 		}
